@@ -183,7 +183,7 @@ class FileStorageObserver(RunObserver):
         os.makedirs(str(store_dir), exist_ok=True)
         source_name, ext = os.path.splitext(os.path.basename(filename))
         md5sum = get_digest(filename)
-        store_name = source_name + "_" + md5sum + ext
+        store_name = source_name + "_" + md5sum +  
         store_path = store_dir / store_name
         if not store_path.exists():
             copyfile(filename, str(store_path))
@@ -224,7 +224,7 @@ class FileStorageObserver(RunObserver):
                 cout=self.cout,
                 savedir=self.dir,
             )
-            ext = self.template.suffix
+            _, ext = os.path.splitext(self.template)
             with open(os.path.join(self.dir, "report" + ext), "w") as f:
                 f.write(report)
 
